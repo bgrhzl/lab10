@@ -21,9 +21,9 @@ const renderContact = (contact, list) => {
 const searchContactByName = (contacts, name) => {
     if (contacts.length === 0) return null;
     const [first, ...rest] = contacts;
-    return first.name.toLowerCase() === name.toLowerCase() ?
-        first :
-        searchContactByName(rest, name);
+    return first.name.toLowerCase() === name.toLowerCase()
+        ? first
+        : searchContactByName(rest, name);
 };
 
 const addContact = () => {
@@ -40,9 +40,9 @@ const findContact = () => {
     const name = prompt("Enter the name of the contact to find:");
     const result = searchContactByName(contacts, name);
     if (result) {
-        alert(`Contact found: ${result.name} - ${result.phone} - ${result.email}`);
+        prompt(`Contact found: ${result.name} - ${result.phone} - ${result.email}`, "OK");
     } else {
-        alert("Contact not found.");
+        prompt("Contact not found.", "OK");
     }
 };
 
@@ -52,15 +52,16 @@ const updateContact = () => {
     if (contact) {
         contact.phone = prompt("Enter new phone number:", contact.phone);
         contact.email = prompt("Enter new email address:", contact.email);
-        alert("Contact updated successfully!");
 
         // 3 saniye sonra listeyi yenile ve sırala
         setTimeout(() => {
             contacts.sort((a, b) => a.name.localeCompare(b.name));
             displayContacts(renderContact);
+            // Güncelleme mesajı prompt ile gösterilsin
+            prompt("Contact updated successfully!", "OK");
         }, 3000);
     } else {
-        alert("Contact not found.");
+        prompt("Contact not found.", "OK");
     }
 };
 
